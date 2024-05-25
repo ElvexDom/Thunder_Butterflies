@@ -1,0 +1,17 @@
+<ul>
+    <li>{{ today | date }}</li>
+    <!-- <li>{{ today | date:'dd/MM/yyyy' }}</li> -->
+</ul>
+<button class=btn_Run (click)="runCourse()" [disabled]="validCourse()">Lancer la course</button>
+<button type="btn_Clear" (click)="clearList()">Effacer la Liste</button>
+<!-- <button type="button" routerLink="/cheval/12">Détail cheval 12</button> -->
+<div>
+    @for (item of runner; track $index) {
+    <div class="mon-item">
+        <img routerLink='/cheval/{{item.id}}' [style]="'left: ' + item.getPos()/5 + '%;'" class=mon-image
+            src="../../../assets/horse.png" />
+        <br><b>Cheval: </b>{{item.name}}<br><b>Position: </b>{{item.get_statuspos() }}
+        <hr>
+    </div>
+    }
+</div>

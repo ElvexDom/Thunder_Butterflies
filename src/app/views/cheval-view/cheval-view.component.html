@@ -1,0 +1,15 @@
+<form #monForm="ngForm" (ngSubmit)="onSubmit()">
+    <label for="nom">Nom:</label><br>
+    <input type="text" name="nom" placeholder="nom" [(ngModel)]="this.cheval.name" required minlength="3"><br />
+    <label for="robe">Robe:</label><br>
+    <input type="text" name="robe" placeholder="robe" [(ngModel)]="this.cheval.robe" required minlength="3"><br />
+    <label for="performance">Performance:</label><br>
+    <input type="number" name="performance" placeholder="performance" [(ngModel)]="this.cheval.performance" required min=0 max=100 minlength="1"><br />
+    <label for="flipette">Flipette:</label><br>
+    <input type="number" name="flipette" placeholder="flipette" [(ngModel)]="this.cheval.flipette" required min=0 max=100 minlength="1"><br />
+    <!-- <label for="vitesse">Vitesse Max:</label><br>
+    <input type="number" name="vitesse" placeholder="vitesse max" [(ngModel)]="this.cheval.vitesse_max" required min=0 max=9 minlength="1"><br /> -->
+    <button type="submit" [disabled]="!monForm.valid">Envoyer</button>
+    <!-- <input type="button" (click)="showMe()" value="affiche dans console"> -->
+</form>
+<p>Nombre de chevaux en course: <b>{{this.nbrChevaux}}</b></p>

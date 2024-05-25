@@ -1,0 +1,10 @@
+<img class=mon-image src="../../../assets/horse.png"/>
+<button type="button" routerLink="/">Retour arriere</button>
+<div>
+    <b>Nom: {{this.chevalById?.name}}</b><br>
+    <b>Robe: {{this.chevalById?.robe}}</b><br>
+    <b>performance: {{this.chevalById?.performance}}</b><br>
+    <b>Flipette: {{this.chevalById?.flipette}}</b><br>
+    <b>Vitesse Max: {{this.chevalById?.vitesse_max}}</b><br>
+</div>
+<button type="button" (click) ="remove(this.idcheval)" routerLink="/">Supprimer</button>
