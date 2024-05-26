@@ -32,6 +32,7 @@ export class ChevalViewComponent  implements OnInit {
     this.cheval = new Cheval("");
     this.participant =new Cheval("");
   }
+  
 /**
  * Cette fonction permet de générer un nouvel id
  */
@@ -45,7 +46,7 @@ export class ChevalViewComponent  implements OnInit {
   // }
 
   /**
-   * Cette fonction permet d'ajouter un cheval à la liste des chevaux
+   * Cette fonction permet d'ajouter un cheval à la liste des particpants
    */
   onSubmit() : void {
     // console.log("clicked");
@@ -62,14 +63,13 @@ export class ChevalViewComponent  implements OnInit {
     console.log(this.chevaux[this.chevaux.length-1]);
     if (!ListCheval){
       this.chevaux.pop()
-      // console.log("la liste est pleine");
+      console.log("la liste est pleine");
     }
     this.nbrChevaux = this.chevalService.getChevaux().length
-    // console.log(`Il y a actuellement ${this.nbrChevaux} chevaux`);
   }
 
-  showMe() {
-    console.log(`${this.cheval?.name} - ${this.cheval.robe ?? ''} - ${this.cheval.vitesse_max ?? ''}`);
-  }
+  // showMe() {
+  //   console.log(`${this.cheval?.name} - ${this.cheval.robe ?? ''} - ${this.cheval.vitesse_max ?? ''}`);
+  // }
 
 }

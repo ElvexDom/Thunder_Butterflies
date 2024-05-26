@@ -13,14 +13,14 @@ import { DatePipe } from '@angular/common';
 })
 
 export class AnimalViewComponent implements OnInit {
-  progressCourse = false;
-  line = 450;
-  runner: Cheval[];
-  race: Cheval[] = [];
-  rank: Cheval[] = [];
-  finishPosition = 0;
-  timerId: any = 0;
-  today: Date = new Date();
+  progressCourse = false; // Indique si la course est en cours
+  line = 450; // Position de la ligne d’arrivée.
+  runner: Cheval[]; // Tableau des chevaux
+  race: Cheval[] = []; // Tableau de la course
+  rank: Cheval[] = []; // Tableau du classement
+  finishPosition = 0; // Status du cheval
+  timerId: any = 0; // Timer
+  today: Date = new Date(); // Date
 
   constructor(private chevalService: ChevalService) {
     this.runner = [];
@@ -30,6 +30,9 @@ export class AnimalViewComponent implements OnInit {
     this.initHorses();
   }
 
+/**
+ * Initialise la liste des participants à partir de ChevalService
+ */
   initHorses() {
     for (let i = 0; i < this.chevalService.getChevaux().length; i++) {
       this.runner[i] = this.chevalService.getChevaux()[i];
@@ -71,6 +74,26 @@ export class AnimalViewComponent implements OnInit {
     return undefined;
   }
 
+ /**
+   * Cette fonction fait courir le cheval choisi
+   * @param horseSelected 
+   */
+ run_Horse(horseSelected: Cheval | undefined): void {
+  if (horseSelected !== undefined) {
+    let proximity = this.proximity_Horse(horseSelected);
+    horseSelected.runHorse(proximity, this.line);
+    this.race.push(horseSelected);
+  }
+}
+
+  /**
+   * Efface la liste des chevaux
+   */
+  clearList(): void {
+    this.runner = [];
+    this.chevalService.clearChevaux();
+  }
+
   /**
    * Cette fonction vérifie si un cheval a franchi la ligne d’arrivée
    * @param horseSelected 
@@ -97,29 +120,19 @@ export class AnimalViewComponent implements OnInit {
     }
   }
 
-  /**
-   * Cette fonction fait courir le cheval choisi
-   * @param horseSelected 
-   */
-  run_Horse(horseSelected: Cheval | undefined): void {
-    if (horseSelected !== undefined) {
-      let proximity = this.proximity_Horse(horseSelected);
-      horseSelected.runHorse(proximity, this.line);
-      this.race.push(horseSelected);
-    }
-  }
-
-  /**
-   * Cette fonction est la fonction principale
-   * Elle fait courir les chevaux tant qu'ils n’ont pas franchi la ligne d’arrivée
-   */
-
+/**
+ * Cette fonction contrôle que la course peut être lancée
+ * @returns 
+ */
 validCourse() : boolean {
   if (this.chevalService.getChevaux().length < 2 || this.progressCourse) {
     return true
   }
   return false;}
 
+/**
+ * Cette fonction initialise la course à son début
+ */
   initCourse(){
     for (let i = 0; i < this.runner.length; i++) {
       this.runner[i].set_statuspos("run");
@@ -129,11 +142,14 @@ validCourse() : boolean {
       this.finishPosition = 0;
       this.timerId = 0
     }
-
   }
+
+    /**
+   * Cette fonction est la fonction principale
+   * Elle fait courir les chevaux tant qu'ils n’ont pas franchi la ligne d’arrivée
+   */
   runCourse() {
     this.progressCourse = true;
-    // console.log(this.timerId.typeof);
     this.initCourse()
     this.timerId = setInterval(() => {
       let horseSelected = this.select_Horse();
@@ -142,11 +158,5 @@ validCourse() : boolean {
       this.verif_Line(horseSelected);
       this.verif_End()
     }, 10);
-  }
-
-  clearList(): void {
-    this.runner = [];
-    this.chevalService.clearChevaux();
-
   }
 }

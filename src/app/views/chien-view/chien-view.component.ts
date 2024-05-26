@@ -27,11 +27,21 @@ export class ChienViewComponent {
     this.alertConsole.showAlert("aie aie aie !");
   }
 
+  /**
+   * Cette fonctionne affiche dans la console:
+   * le nom du chien
+   * la valeur du formulaire
+   * le contrôle du formulaire
+   */
   showMe() {
     //On affecte manuellement la valeur de l'input (recuperee dans le formControl) a notre objet metier
     // this.chien.name = this.nameControl.value;
     console.log(`${this.chien.name} - ${this.nameControl.value} - ${this.nameControl.dirty}`);
   }
+
+  /**
+   * Cette fonction s'exécute lors de la soumission du formulaire
+   */
   onSubmit() {
     this.showMe();
   }

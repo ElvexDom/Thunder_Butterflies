@@ -9,10 +9,10 @@ export class ChevalService {
   private listChevaux: Cheval[] = [];
 
   constructor() { };
-  /**
-   * Taille maximale de la liste des chevaux
-   */
+  
+  // Taille maximale de la liste des chevaux
   private MAX_CHEVAUX = 10;
+  
   /**
    * 
    * @returns 

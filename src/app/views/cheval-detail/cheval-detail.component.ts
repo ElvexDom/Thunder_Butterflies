@@ -18,25 +18,26 @@ export class ChevalDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.chevalById = new Cheval("");
       this.idcheval = parseInt(params['id']);
-      this.getData(); //Charge les donnees
+      this.getData();
     });
   }
 
-  getData(): void {
-    console.log("Id recupere : %d", this.idcheval);
-    this.chevalById = this.chevalService.getChevalById(this.idcheval);
-    console.log(this.chevalById);
-    let name = this.chevalById?.name;
-    let robe = this.chevalById?.robe;
-    //ici on appelle le service prealablement injecte via constructeur
-    // qui va nous donner la donne correspondante a cet id
-    // this.cheval = this.chevalService.getChevalById(testId);
-  }
-
-  remove(Id:number):void {
-    this.chevalService.removeChevaById(Id)
-  }
   ngOnInit(): void {
   }
 
+  /**
+   * Cette fonctionne récupère l'ID du cheval
+   */
+  getData(): void {
+    // console.log("Id recupere : %d", this.idcheval);
+    this.chevalById = this.chevalService.getChevalById(this.idcheval);
+  }
+
+  /**
+   * Cette fonctionne supprime un cheval en fonction de son ID
+   * @param Id 
+   */
+  remove(Id:number):void {
+    this.chevalService.removeChevaById(Id)
+  }
 }
